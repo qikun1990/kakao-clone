@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Linking with css file and a short cut is link:css -->
+    <link rel="stylesheet" href="css/styles.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,18 +15,18 @@
   <body>
     <!-- This creates a statusbar including servive satus, wifi signal, time, etc. -->
     <div class="status-bar">
-      <div class="status-bar_column">
+      <div class="status-bar__column">
         <span>No Service</span>
         <i class="fas fa-wifi"></i>
       </div>
-      <div class="status-bar_column">
+      <div class="status-bar__column">
         <span>18:43</span>
       </div>
-      <div class="status-bar_column">
+      <div class="status-bar__column">
+        <i class="fas fa-unlock-alt fa-xs"></i>
         <span>110%</span>
-        <i class="fas fa-unlock-alt"></i>
-        <i class="fas fa-battery-full"></i>
-        <i class="fas fa-bolt"></i>
+        <i class="fas fa-battery-full fa-lg"></i>
+        <i class="fas fa-bolt fa-xs"></i>
       </div>
     </div>
 

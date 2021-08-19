@@ -19,3 +19,13 @@
 .screen-header__icons span {
   margin-left: 20px;
 }
+
+.screen-header__red-dot {
+  background-color: tomato;
+  width: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  position: absolute;
+  right: 19px;
+  top: 53px;
+}

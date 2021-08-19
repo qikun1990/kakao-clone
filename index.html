@@ -39,9 +39,16 @@
     </header>
 
     <!-- This creates a login form (email/phone number, password, Log In, and Sign Up boxes) -->
-    <form class="login-form">
-      <input type="text" placeholder="Email or phone number" />
-      <input type="password" placeholder="Password" />
+    <!-- By using method=get, it will show data on the url. Using method=post will send data to the server.  -->
+    <form action="friends.html" method="get" class="login-form">
+      <!-- By assigning name as username, once a user puts data on the username section, it will be shown on the url on the redirected page. -->
+      <input
+        name="username"
+        required
+        type="text"
+        placeholder="Email or phone number"
+      />
+      <input name="password" required type="password" placeholder="Password" />
       <input type="submit" value="Log In" />
       <input type="submit" value="Sign Up" />
       <a href="#">Find Kokoa Account or Password</a>

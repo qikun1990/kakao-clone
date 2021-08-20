@@ -4,10 +4,37 @@
   font-size: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .settings__setting i {
   margin-right: 18px;
   font-size: 22px;
   opacity: 0.9;
+}
+
+.settings__setting-column:last-child {
+  opacity: 0.4;
+}
+
+.settings__setting-column-last {
+  padding-bottom: 20px;
+}
+
+.settings__setting-column-first {
+  padding-top: 20px;
+}
+
+.settings__notification {
+  position: absolute;
+  left: 140px;
+  bottom: 165px;
+  font-weight: 900;
+}
+
+.settings__notification-second {
+  position: absolute;
+  left: 143px;
+  bottom: 102px;
+  font-weight: 900;
 }

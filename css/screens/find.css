@@ -69,6 +69,13 @@
   font-size: 20px;
 }
 
+.open-post__title-second {
+  font-weight: 400;
+  margin-bottom: 8px;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
 .open-post__hashtags {
   text-transform: uppercase;
   opacity: 0.6;

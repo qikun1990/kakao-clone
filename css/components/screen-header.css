@@ -28,4 +28,5 @@
   position: absolute;
   right: 19px;
   top: 53px;
+  animation: appearRedDotAnimation 3s ease-in-out infinite;
 }

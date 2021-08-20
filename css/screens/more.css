@@ -52,4 +52,5 @@
   left: 195px;
   top: 165px;
   font-size: 55px;
+  animation: appearRedDotAnimation 3s ease-in-out infinite;
 }

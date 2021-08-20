@@ -19,8 +19,8 @@
 
 .nav__notification {
   position: absolute;
-  left: 12px;
-  bottom: 7px;
+  left: 16px;
+  bottom: 10px;
 }
 
 .nav__red_dot {
@@ -28,6 +28,10 @@
   display: flex;
   font-size: 40px;
   position: absolute;
-  left: 20px;
-  bottom: 13px;
+  left: 22px;
+  bottom: 14px;
+}
+
+.nav i {
+  font-size: 25px;
 }

@@ -2,10 +2,14 @@
   margin-top: 35px;
 }
 
+.more-screen .icon-row-second {
+  margin-top: 45px;
+}
+
 .more-suggestions {
-  margin-top: 50px;
+  margin-top: 40px;
   border-top: var(--main-border);
-  padding-top: 30px;
+  padding-top: 25px;
 }
 
 .more-suggestions__title {

@@ -17,3 +17,21 @@
 .icon-row__icon span {
   margin-top: 25px;
 }
+
+.icon-row-second {
+  display: flex;
+  margin-top: 25px;
+}
+.icon-row-second__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 60px;
+}
+.icon-row-second__icon i {
+  font-size: 30px;
+}
+
+.icon-row-second__icon span {
+  margin-top: 25px;
+}

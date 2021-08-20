@@ -1,5 +1,5 @@
-<!-- Sixth page of the Kokoa Clone  -->
-<!-- 07.png of the screenshots -->
+<!-- Seventh page of the Kokoa Clone  -->
+<!-- 09.png of the screenshots -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,11 +8,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings - to Kokoa Clone</title>
+    <title>Chat with Inwookie - to Kokoa Clone</title>
   </head>
-  <body>
+  <body id="chat-screen">
     <!-- This creates a statusbar including servive satus, wifi signal, time, etc. -->
-    <div class="status-bar">
+    <div class="status-bar-chat">
       <div class="status-bar__column">
         <span>No Service</span>
         <i class="fas fa-wifi"></i>
@@ -34,117 +34,17 @@
         ></a>
       </div>
       <div class="alt-header__column">
-        <div class="alt-header__title">Settings</div>
+        <div class="alt-header__title alt-header__title-chat">Inwookie</div>
       </div>
       <div class="alt-header__column">
         <span><i class="fas fa-search fa-lg"></i></span>
+        <span
+          ><i class="fas fa-bars fa-lg alt-header__column-icon-last"></i
+        ></span>
       </div>
     </header>
 
-    <main class="main-screen more-screen">
-      <ul class="settings-list">
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="fas fa-bullhorn"></i> <span>Notices</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="fas fa-flask"></i>
-            <span>Kokoa Lab</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-columnv settings__setting-column-last">
-            <i class="fas fa-info-circle"></i>
-            <span>Version</span>
-          </div>
-          <div class="settings__setting-column settings__setting-column-last">
-            Latest Version
-          </div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column settings__setting-column-first">
-            <i class="fas fa-lock"></i> <span>Privacy</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="far fa-bell"></i>
-            <span>Notifications</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="far fa-user"></i>
-            <span>Friends</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="far fa-comment"></i>
-            <span>Chats</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="far fa-sun"></i>
-            <span>Display</span>
-            <span class="settings__notification badge">N</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="fas fa-brush"></i>
-            <span>Themes</span>
-          </div>
-          <span class="settings__notification-second badge">N</span>
-          </div>
-          <div class="settings__setting-column">Default theme</div>
-          
-        </li>
-        <li class="settings__setting">
-          <div class="settings__setting-column">
-            <i class="fas fa-phone"></i>
-            <span>Call</span>
-          </div>
-          <div class="settings__setting-column"></div>
-        </li>
-      </ul>
-    </main>
-
-    <nav class="nav">
-      <ul class="nav__list">
-        <li class="nav__btn">
-          <a class="nav__link" href="friends.html"
-            ><i class="far fa-user fa-lg"></i
-          ></a>
-        </li>
-        <li class="nav__btn">
-          <a class="nav__link" href="chats.html">
-            <i class="far fa-comment fa-lg"></i
-          ></a>
-        </li>
-        <li class="nav__btn">
-          <a class="nav__link" href="find.html"
-            ><i class="fas fa-search fa-lg"></i
-          ></a>
-        </li>
-        <li class="nav__btn">
-          <a class="nav__link" href="more.html"
-            ><span class="nav__red_dot">.</span
-            ><i class="fas fa-ellipsis-h fa-lg"></i
-          ></a>
-        </li>
-      </ul>
-    </nav>
+    <main class="main-screen more-screen"></main>
 
     <!-- This is needed as it is a key to using icons from fontawesome.com -->
     <script

@@ -5,6 +5,9 @@
   justify-content: center;
   padding-bottom: 25px;
 }
+.alt-header__column {
+  width: 33%;
+}
 
 .alt-header__title {
   font-size: 25px;
@@ -16,12 +19,14 @@
 
 .alt-header__column:last-child {
   margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .alt-header__column-icon-last {
   margin-left: 20px;
 }
 
-.alt-header__title-chat {
-  margin-left: 50px;
+.alt-header__column:nth-child(2) {
+  text-align: center;
 }

@@ -2,7 +2,7 @@
 #no-mobile {
   position: absolute;
   z-index: 99;
-  height: 140vh;
+  height: 180vh;
   background-color: var(--yellow);
   width: 100vw;
   display: flex;

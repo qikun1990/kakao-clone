@@ -14,6 +14,7 @@
 
 .more-suggestions__title {
   margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .more-suggestions__icons {
@@ -22,4 +23,33 @@
 
 .more-suggestions__icon {
   margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.more-suggestions__icon-image {
+  width: 55px;
+  height: 55px;
+  background-color: var(--yellow);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.more-suggestions__icon-image i {
+  font-size: 30px;
+  color: white;
+}
+
+.more__red_dot {
+  color: tomato;
+  display: flex;
+  font-size: 120px;
+  position: absolute;
+  left: 195px;
+  top: 165px;
+  font-size: 55px;
 }

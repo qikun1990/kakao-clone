@@ -21,5 +21,16 @@
 }
 
 .main-chat {
-  margin-top: 200px;
+  margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat__timestamp {
+  color: rgb(255, 255, 255, 0.8);
+  background-color: #92a4b2;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 14px;
 }

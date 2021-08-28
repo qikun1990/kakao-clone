@@ -12,6 +12,7 @@ Kakao Talk is dominant sms provider in South Korea. This project only used HTML 
 <img src="demo/demo:friends.png" width=242 >
 <img src="demo/demo:more.png"  width=250>
 <br/>
+<br/>
 <img src="demo/demo:chat.png"width=250 >
 <img src="demo/demo:settings.png"width=250 >
 <img src="demo/demo:find.png"width=250 >

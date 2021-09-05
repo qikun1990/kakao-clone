@@ -5,7 +5,7 @@ Kakao Talk is dominant sms provider in South Korea. This project only used HTML 
 
 ## Demo
 
-[Kakao Clone Demo](https://inwookie.github.io/kokoa-clone-2021/)
+[Kakao Clone Demo](https://inwookie.github.io/kakao-clone/)
 
 <div align="center">
 <img src="demo/demo:welcome.png" width=250 >

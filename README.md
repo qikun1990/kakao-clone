@@ -1,4 +1,4 @@
-# Kakao Clone | HTML & CSS
+# Kakao Talk Clone | HTML & CSS
 
 Kakao Talk is dominant sms provider in South Korea. This project only used HTML and CSS in order to clone the pages of the App.
 <br />

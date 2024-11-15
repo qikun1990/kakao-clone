@@ -167,8 +167,7 @@
 
         mediaElement.addEventListener('timeupdate', onTimeUpdate);
       } else {
-        // 已经点击过，���示模态弹窗
-        mediaElement.controls = true;
+        // 已经点击过，显示模态弹窗
         showModal(function () {
           setTimeout(function () {
             mediaElement.style.filter = 'none';
@@ -257,7 +256,7 @@
           } else if (content.type === 'video') {
             const video = document.createElement('video');
             video.src = content.src;
-            video.controls = true; // 显示视频控件
+            video.controls = false; // 初始不显示视频控件
             video.classList.add('chat-video');
             video.addEventListener('click', handleMediaClick); // 确保 handleMediaClick 已定义
 
@@ -273,7 +272,7 @@
           } else if (content.type === 'audio') {
             const audio = document.createElement('audio');
             audio.src = content.src;
-            audio.controls = true; // 添加 controls 属性
+            audio.controls = false; // 初始不显示音频控件
             audio.classList.add('chat-audio');
             audio.addEventListener('click', handleMediaClick);
             messageInfo.appendChild(audio);

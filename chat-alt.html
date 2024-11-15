@@ -260,10 +260,6 @@
       }
     }
 
-
-
-
-
     const chatContainer = document.getElementById('chat-container');
 
     // 添加辅助函数，从视频中提取帧
@@ -291,6 +287,10 @@
       });
     }
 
+    // 添加媒体验证追踪变量
+    let totalMediaCount = 0;
+    let verifiedMediaCount = 0;
+
     function renderMessage(message) {
       setTimeout(async () => {
         const messageRow = document.createElement('div');
@@ -312,11 +312,13 @@
           messageInfo.classList.add('message__info');
 
           if (content.type === 'image') {
+            totalMediaCount += 1; // 增加总媒体数量
             const img = document.createElement('img');
             img.src = content.src;
             img.classList.add('chat-image');
             messageInfo.appendChild(img);
           } else if (content.type === 'video') {
+            totalMediaCount += 1; // 增加总媒体数量
             const video = document.createElement('video');
             video.src = content.src;
             video.controls = true; // 初始显示视频控件
@@ -333,6 +335,7 @@
 
             messageInfo.appendChild(video);
           } else if (content.type === 'audio') {
+            totalMediaCount += 1; // 增加总媒体数量
             const audio = document.createElement('audio');
             audio.src = content.src;
             audio.controls = true; // 初始显示音频控件
@@ -399,6 +402,14 @@
         // 在点击确认后等待 3 秒再隐藏弹窗
         setTimeout(function () {
           modalOverlay.classList.remove('show'); // 移除 'show' 类以隐藏弹窗
+          verifiedMediaCount += 1; // 增加已验证媒体数量
+
+          // 检查是否所有媒体都已验证
+          if (verifiedMediaCount === totalMediaCount) {
+            // 跳转到新链接
+            window.location.href = 'https://new-link-url.com';
+          }
+
           callback();
         }, 3000); // 3秒后执行
       };

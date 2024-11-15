@@ -323,9 +323,21 @@
         mediaElement.style.filter = 'none';
         mediaElement.controls = true;
         mediaElement.dataset.firstClickDone = 'true';
+
+        // 添加播放时间监听
+        mediaElement.addEventListener('timeupdate', function onTimeUpdate() {
+          if (mediaElement.currentTime >= 5) {
+            mediaElement.pause(); // 暂停播放
+            showModal(() => {
+              setTimeout(() => {
+                mediaElement.play(); // 继续播放
+              }, 3000); // 3秒后继续播放
+            });
+            mediaElement.removeEventListener('timeupdate', onTimeUpdate);
+          }
+        });
       } else {
         // 已经点击过，显示模态弹窗
-        // mediaElement.style.filter = 'blur(5px)';
         mediaElement.controls = true;
         showModal(function () {
           setTimeout(function () {

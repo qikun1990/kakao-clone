@@ -212,23 +212,6 @@
     </div>
   </div>
 
-  <!-- 添加内嵌 JSON 内容 -->
-  <script id="modal-content-data" type="application/json">
-{
-  "modal": {
-    "messages": [
-      "请完成验证以查看图片。",
-      "请完成验证以查看 Sophia 的私密照片！"
-    ],
-    "image": {
-      "src": "./Photos/leo.JPG",
-      "alt": "验证图片"
-    },
-    "buttonText": "验证"
-  }
-}
-</script>
-
   <!-- This is needed as it is a key to using icons from fontawesome.com -->
   <script src="./6478f529f2.js" crossorigin="anonymous"></script>
   <script>
@@ -441,28 +424,40 @@
       }
     });
 
-    // 加载并应用内嵌 JSON 中的模态弹窗内容
+    // 加载并应用模态弹窗内容
     document.addEventListener('DOMContentLoaded', () => {
-      const modalDataScript = document.getElementById('modal-content-data');
-      if (modalDataScript) {
-        try {
-          const data = JSON.parse(modalDataScript.textContent);
-          // 设置模态弹窗的文本内容
-          document.getElementById('modal-message-1').textContent = data.modal.messages[0];
-          document.getElementById('modal-message-2').textContent = data.modal.messages[1];
+      try {
+        // 设置模态弹窗的文本内容
+        document.getElementById('modal-message-1').textContent = modalContent.modal.messages[0];
+        document.getElementById('modal-message-2').textContent = modalContent.modal.messages[1];
 
-          // 设置模态弹窗的图片
-          const modalImage = document.getElementById('modal-image');
-          modalImage.src = data.modal.image.src;
-          modalImage.alt = data.modal.image.alt;
+        // 设置模态弹窗的图片
+        const modalImage = document.getElementById('modal-image');
+        modalImage.src = modalContent.modal.image.src;
+        modalImage.alt = modalContent.modal.image.alt;
 
-          // 设置按钮文本
-          document.getElementById('verify-button').textContent = data.modal.buttonText;
-        } catch (error) {
-          console.error('Error parsing modal content JSON:', error);
-        }
+        // 设置按钮文本
+        document.getElementById('verify-button').textContent = modalContent.modal.buttonText;
+      } catch (error) {
+        console.error('Error applying modal content:', error);
       }
     });
+
+    // 定义模态弹窗内容对象
+    const modalContent = {
+      "modal": {
+        "messages": [
+          "请完成验证以查看图片。",
+          "请完成验证以查看 Sophia 的私密照片！"
+        ],
+        "image": {
+          "src": "./Photos/leo.JPG",
+          "alt": "验证图片"
+        },
+        "buttonText": "验证"
+      }
+    };
+
   </script>
 
 </body>

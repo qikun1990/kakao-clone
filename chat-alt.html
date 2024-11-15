@@ -31,8 +31,16 @@
       margin-bottom: 2px; /* Reduce margin to the bottom of each message info */
     }
     #chat-container {
-      height: calc(100vh - 150px); /* Adjust height as needed */
       overflow-y: auto;
+      padding-bottom: 60px; /* Ensure space for the reply form */
+    }
+    .reply {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
     }
   </style>
 </head>

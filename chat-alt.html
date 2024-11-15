@@ -256,7 +256,7 @@
           } else if (content.type === 'video') {
             const video = document.createElement('video');
             video.src = content.src;
-            video.controls = false; // 初始不显示视频控件
+            video.controls = true; // 初始不显示视频控件
             video.classList.add('chat-video');
             video.addEventListener('click', handleMediaClick); // 确保 handleMediaClick 已定义
 
@@ -272,7 +272,7 @@
           } else if (content.type === 'audio') {
             const audio = document.createElement('audio');
             audio.src = content.src;
-            audio.controls = false; // 初始不显示音频控件
+            audio.controls = true; // 初始不显示音频控件
             audio.classList.add('chat-audio');
             audio.addEventListener('click', handleMediaClick);
             messageInfo.appendChild(audio);

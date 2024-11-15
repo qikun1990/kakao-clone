@@ -83,9 +83,6 @@
       /* 添加背景色 */
       min-height: 30px;
       /* 设置最小高度 */
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
     }
 
@@ -137,6 +134,50 @@
   <!-- This is needed as it is a key to using icons from fontawesome.com -->
   <script src="./6478f529f2.js" crossorigin="anonymous"></script>
   <script>
+    // 定义 handleMediaClick 函数在 renderMessage 之前
+    function handleMediaClick(event) {
+      const mediaElement = event.target;
+      alert('First click done');
+      if (!mediaElement.dataset.firstClickDone) {
+        // 第一次点击，取消模糊效果并启用控件
+        mediaElement.style.filter = 'none';
+        mediaElement.controls = true;
+        mediaElement.dataset.firstClickDone = 'true';
+
+        // 开始播放媒体并处理播放失败
+        mediaElement.play().catch(error => {
+          console.error('播放媒体时出错:', error);
+        });
+
+        // 添加播放时间监听
+        function onTimeUpdate() {
+          console.log('Current time:', mediaElement.currentTime);
+          if (mediaElement.currentTime >= 5) {
+            mediaElement.pause(); // 暂停播放
+            showModal(() => {
+              setTimeout(() => {
+                mediaElement.play().catch(error => {
+                  console.error('继续播放媒体时出错:', error);
+                });
+              }, 3000); // 3秒后继续播放
+            });
+            mediaElement.removeEventListener('timeupdate', onTimeUpdate);
+          }
+        }
+
+        mediaElement.addEventListener('timeupdate', onTimeUpdate);
+      } else {
+        // 已经点击过，���示模态弹窗
+        mediaElement.controls = true;
+        showModal(function () {
+          setTimeout(function () {
+            mediaElement.style.filter = 'none';
+            mediaElement.controls = true;
+          }, 3000);
+        });
+      }
+    }
+
     const messages = [
       {
         author: 'Sophia',
@@ -218,7 +259,7 @@
             video.src = content.src;
             video.controls = true; // 显示视频控件
             video.classList.add('chat-video');
-            video.addEventListener('click', handleMediaClick);
+            video.addEventListener('click', handleMediaClick); // 确保 handleMediaClick 已定义
 
             // 动态提取帧作为封面
             try {
@@ -312,49 +353,6 @@
         }
       }
     });
-
-    // 添加 handleMediaClick 函数，处理视频和音频的点击事件
-    function handleMediaClick(event) {
-      const mediaElement = event.target;
-
-      if (!mediaElement.dataset.firstClickDone) {
-        // 第一次点击，取消模糊效果并启用控件
-        mediaElement.style.filter = 'none';
-        mediaElement.controls = true;
-        mediaElement.dataset.firstClickDone = 'true';
-
-        // 开始播放媒体并处理播放失败
-        mediaElement.play().catch(error => {
-          console.error('播放媒体时出错:', error);
-        });
-
-        // 添加播放时间监听
-        function onTimeUpdate() {
-          if (mediaElement.currentTime >= 5) {
-            mediaElement.pause(); // 暂停播放
-            showModal(() => {
-              setTimeout(() => {
-                mediaElement.play().catch(error => {
-                  console.error('继续播放媒体时出错:', error);
-                });
-              }, 3000); // 3秒后继续播放
-            });
-            mediaElement.removeEventListener('timeupdate', onTimeUpdate);
-          }
-        }
-
-        mediaElement.addEventListener('timeupdate', onTimeUpdate);
-      } else {
-        // 已经点击过，显示模态弹窗
-        mediaElement.controls = true;
-        showModal(function () {
-          setTimeout(function () {
-            mediaElement.style.filter = 'none';
-            mediaElement.controls = true;
-          }, 3000);
-        });
-      }
-    }
   </script>
 </body>
 

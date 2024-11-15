@@ -70,8 +70,7 @@
     }
 
     /* 为视频和音频添加样式 */
-    .chat-video,
-    .chat-audio {
+    .chat-video {
       max-width: 280px;
       width: 100%;
       margin-top: 1px;
@@ -90,31 +89,6 @@
       position: relative;
     }
 
-    .chat-video {
-      /* 视频特定样式（如果需要） */
-    }
-
-    .chat-audio {
-      /* 音频特定样式（如果需要） */
-      position: relative;
-    }
-
-    /* 可选：为音频添加播放图标 */
-    .chat-audio::before {
-      content: '🎵 点击播放';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #555;
-      pointer-events: none;
-      font-size: 14px;
-    }
-
-    /* 隐藏默认的播放提示文字 */
-    .chat-audio::-webkit-media-controls {
-      display: none !important;
-    }
   </style>
 </head>
 

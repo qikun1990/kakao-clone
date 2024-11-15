@@ -312,10 +312,14 @@
 
       const verifyButton = document.getElementById('verify-button');
       verifyButton.onclick = function () {
-        modalOverlay.style.display = 'none';
-        callback();
+        // 在点击确认后等待 3 秒再隐藏弹窗
+        setTimeout(function () {
+          modalOverlay.style.display = 'none';
+          callback();
+        }, 3000); // 3秒后执行
       };
     }
+
     var firstClickDone = false;
     // 更新图片的点击事件监听器
     document.addEventListener('click', function (event) {

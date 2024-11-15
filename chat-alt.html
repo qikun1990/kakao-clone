@@ -323,6 +323,9 @@
         mediaElement.controls = true;
         mediaElement.dataset.firstClickDone = 'true';
 
+        // 开始播放媒体
+        mediaElement.play();
+
         // 添加播放时间监听
         function onTimeUpdate() {
           if (mediaElement.currentTime >= 5) {

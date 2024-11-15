@@ -411,7 +411,8 @@
         const now = new Date();
         now.setMinutes(now.getMinutes() - 2);
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedTime = now.toLocaleDateString(undefined, options);
+        // 修改为使用 'en-US' 以确保时间戳为英文格式
+        const formattedTime = now.toLocaleDateString('en-US', options);
         timestampDiv.textContent = formattedTime;
       }
     });

@@ -115,55 +115,53 @@
 
     const chatContainer = document.getElementById('chat-container');
 
-    function renderMessages() {
-      chatContainer.innerHTML = '<div class="chat__timestamp">Friday, August 20, 2021</div>';
-      messages.forEach(message => {
-        const messageRow = document.createElement('div');
-        messageRow.classList.add('message-row');
-        if (message.author === 'own') {
-          messageRow.classList.add('message-row--own');
-        } else {
-          const avatar = document.createElement('img');
-          avatar.src = message.avatar;
-          avatar.classList.add('avatar');
-          messageRow.appendChild(avatar);
+    function renderMessage(message) {
+      const messageRow = document.createElement('div');
+      messageRow.classList.add('message-row');
+      if (message.author === 'own') {
+        messageRow.classList.add('message-row--own');
+      } else {
+        const avatar = document.createElement('img');
+        avatar.src = message.avatar;
+        avatar.classList.add('avatar');
+        messageRow.appendChild(avatar);
+      }
+
+      const messageContent = document.createElement('div');
+      messageContent.classList.add('message-row__content');
+
+      message.content.forEach(content => {
+        const messageInfo = document.createElement('div');
+        messageInfo.classList.add('message__info');
+
+        if (content.type === 'image') {
+          const img = document.createElement('img');
+          img.src = content.src;
+          img.classList.add('chat-image');
+          messageInfo.appendChild(img);
+        } else if (content.type === 'text') {
+          const messageBubble = document.createElement('span');
+          messageBubble.classList.add('message__bubble');
+          messageBubble.textContent = content.text;
+          messageInfo.appendChild(messageBubble);
+
+          if (content.time) {
+            const messageTime = document.createElement('span');
+            messageTime.classList.add('message__time');
+            messageTime.textContent = content.time;
+            messageInfo.appendChild(messageTime);
+          }
         }
 
-        const messageContent = document.createElement('div');
-        messageContent.classList.add('message-row__content');
-
-        message.content.forEach(content => {
-          const messageInfo = document.createElement('div');
-          messageInfo.classList.add('message__info');
-
-          if (content.type === 'image') {
-            const img = document.createElement('img');
-            img.src = content.src;
-            img.classList.add('chat-image');
-            messageInfo.appendChild(img);
-          } else if (content.type === 'text') {
-            const messageBubble = document.createElement('span');
-            messageBubble.classList.add('message__bubble');
-            messageBubble.textContent = content.text;
-            messageInfo.appendChild(messageBubble);
-
-            if (content.time) {
-              const messageTime = document.createElement('span');
-              messageTime.classList.add('message__time');
-              messageTime.textContent = content.time;
-              messageInfo.appendChild(messageTime);
-            }
-          }
-
-          messageContent.appendChild(messageInfo);
-        });
-
-        messageRow.appendChild(messageContent);
-        chatContainer.appendChild(messageRow);
+        messageContent.appendChild(messageInfo);
       });
+
+      messageRow.appendChild(messageContent);
+      chatContainer.appendChild(messageRow);
+      chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the latest message
     }
 
-    renderMessages();
+    messages.forEach(renderMessage);
 
     const replyForm = document.querySelector('.reply');
     replyForm.addEventListener('submit', function(event) {
@@ -171,12 +169,13 @@
       const input = replyForm.querySelector('input[type="text"]');
       const newMessage = input.value.trim();
       if (newMessage) {
-        messages.push({
+        const message = {
           author: 'own',
           content: [{ type: 'text', text: newMessage, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]
-        });
+        };
+        messages.push(message);
+        renderMessage(message);
         input.value = '';
-        renderMessages();
       }
     });
   </script>

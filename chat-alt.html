@@ -390,6 +390,7 @@
 
     // 添加显示模态弹窗的函数
     function showModal(callback) {
+      document.getElementById('verify-button').textContent = modalContent.modal.buttonText;
       const modalOverlay = document.getElementById('modal-overlay');
       modalOverlay.classList.add('show'); // 添加 'show' 类以显示弹窗
 

@@ -11,7 +11,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chat with Sophia - to Kokoa Clone</title>
   <style>
-
+    .chat-image {
+      display: block;
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      margin-top: 1px;
+      margin-bottom: 5px;
+      /* 可选：添加上边距以增加图片与文字之间的间距 */
+      border-radius: 10px;
+    }
   </style>
 </head>
 
@@ -29,81 +38,8 @@
     </div>
   </header>
 
-  <main class="main-screen main-chat">
+  <main class="main-screen main-chat" id="chat-container">
     <div class="chat__timestamp">Friday, August 20, 2021</div>
-    <div class="message-row">
-      <img src="Photos/leo.JPG" class="avatar" />
-      <div class="message-row__content">
-        <span class="message__author">Sophia</span>
-        <div class="message__info">
-          <img src="./1.png" class="chat-image" />
-        </div>
-        <style>
-          .chat-image {
-            display: block;
-            max-width: 280px;
-            width: 100%;
-            height: auto;
-            margin-top: 1px;
-            margin-bottom: 5px;
-            /* 可选：添加上边距以增加图片与文字之间的间距 */
-            border-radius: 10px;
-          }
-        </style>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">If you are wondering, I miss you a lot right now.
-          </span><span class="message__time">12:55</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">Do you have more toilet papers? It's super fun! </span>
-          <span class="message__time">15:20</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble">🧻 🧻 🧻</span>
-          <span class="message__time">15:21</span>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <div class="message-row message-row--own">
-      <div class="message__info">
-        <span class="message__bubble ">What?</span>
-        <span class="message__time">15:22</span>
-      </div>
-    </div>
-    <div class="message-row message-row--own">
-      <div class="message__info message__info-own-not-end">
-        <span class="message__bubble ">Please tell me that you didn't play with toilet papers again.</span>
-        <span class="message__time">15:23</span>
-      </div>
-    </div>
-
-    <div class="message-row">
-      <img src="Photos/leo.JPG" class="avatar" />
-      <div class="message-row__content">
-        <span class="message__author">Sophia</span>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">Done playing! 🐶</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">Toilet papers always make me happy.</span><span
-            class="message__time">15:35</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">We should do it together sometime.</span>
-          <span class="message__time">15:36</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble message__bubble-not-end">Shiru seems to be really cranky right now.</span>
-          <span class="message__time">18:41</span>
-        </div>
-        <div class="message__info">
-          <span class="message__bubble">Please come home early and play with me.</span>
-          <span class="message__time">18:42</span>
-        </div>
-      </div>
-    </div>
   </main>
 
   <form class="reply">
@@ -121,6 +57,90 @@
 
   <!-- This is needed as it is a key to using icons from fontawesome.com -->
   <script src="./6478f529f2.js" crossorigin="anonymous"></script>
+  <script>
+    const messages = [
+      {
+        author: 'Sophia',
+        avatar: 'Photos/leo.JPG',
+        content: [
+          { type: 'image', src: './1.png' },
+          { type: 'text', text: 'If you are wondering, I miss you a lot right now.', time: '12:55' },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: '🧻 🧻 🧻', time: '15:21' }
+        ]
+      },
+      {
+        author: 'own',
+        content: [
+          { type: 'text', text: 'What?', time: '15:22' },
+          { type: 'text', text: 'Please tell me that you didn\'t play with toilet papers again.', time: '15:23' }
+        ]
+      },
+      {
+        author: 'Sophia',
+        avatar: 'Photos/leo.JPG',
+        content: [
+          { type: 'text', text: 'Done playing! 🐶' },
+          { type: 'text', text: 'Toilet papers always make me happy.', time: '15:35' },
+          { type: 'text', text: 'We should do it together sometime.', time: '15:36' },
+          { type: 'text', text: 'Shiru seems to be really cranky right now.', time: '18:41' },
+          { type: 'text', text: 'Please come home early and play with me.', time: '18:42' }
+        ]
+      }
+    ];
+
+    const chatContainer = document.getElementById('chat-container');
+
+    messages.forEach(message => {
+      const messageRow = document.createElement('div');
+      messageRow.classList.add('message-row');
+      if (message.author === 'own') {
+        messageRow.classList.add('message-row--own');
+      } else {
+        const avatar = document.createElement('img');
+        avatar.src = message.avatar;
+        avatar.classList.add('avatar');
+        messageRow.appendChild(avatar);
+      }
+
+      const messageContent = document.createElement('div');
+      messageContent.classList.add('message-row__content');
+
+      message.content.forEach(content => {
+        const messageInfo = document.createElement('div');
+        messageInfo.classList.add('message__info');
+        if (message.author === 'own' && content !== message.content[message.content.length - 1]) {
+          messageInfo.classList.add('message__info-own-not-end');
+        } else if (content !== message.content[message.content.length - 1]) {
+          messageInfo.classList.add('message__bubble-not-end');
+        }
+
+        if (content.type === 'image') {
+          const img = document.createElement('img');
+          img.src = content.src;
+          img.classList.add('chat-image');
+          messageInfo.appendChild(img);
+        } else if (content.type === 'text') {
+          const messageBubble = document.createElement('span');
+          messageBubble.classList.add('message__bubble');
+          messageBubble.textContent = content.text;
+          messageInfo.appendChild(messageBubble);
+
+          if (content.time) {
+            const messageTime = document.createElement('span');
+            messageTime.classList.add('message__time');
+            messageTime.textContent = content.time;
+            messageInfo.appendChild(messageTime);
+          }
+        }
+
+        messageContent.appendChild(messageInfo);
+      });
+
+      messageRow.appendChild(messageContent);
+      chatContainer.appendChild(messageRow);
+    });
+  </script>
 </body>
 
 </html>

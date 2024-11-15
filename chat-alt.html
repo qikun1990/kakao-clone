@@ -35,9 +35,28 @@
     #chat-container {
       overflow-y: auto;
       padding-bottom: 60px; /* Ensure space for the reply form */
-      max-height: 80vh; /* Set a maximum height for the chat container */
     }
 
+    /* 模态弹窗的样式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000; /* 确保弹窗在最上层 */
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -71,7 +90,13 @@
     </div>
   </form>
 
-
+  <!-- 添加模态弹窗的 HTML -->
+  <div id="modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <p>请完成验证以查看图片。</p>
+      <button id="verify-button">验证</button>
+    </div>
+  </div>
 
   <!-- This is needed as it is a key to using icons from fontawesome.com -->
   <script src="./6478f529f2.js" crossorigin="anonymous"></script>
@@ -168,23 +193,37 @@
       }
     });
 
-    // 添加验证函数
-    function verifyUser(callback) {
-      // 模拟验证流程
-      if (confirm("请完成验证以查看图片")) {
-        callback();
-      }
-    }
+    // 添加显示模态弹窗的函数
+    function showModal(callback) {
+      const modalOverlay = document.getElementById('modal-overlay');
+      modalOverlay.style.display = 'flex';
 
-    // 为图片添加点击事件监听器
+      const verifyButton = document.getElementById('verify-button');
+      verifyButton.onclick = function() {
+        modalOverlay.style.display = 'none';
+        callback();
+      };
+    }
+    var firstClickDone = false;
+    // 更新图片的点击事件监听器
     document.addEventListener('click', function(event) {
       if (event.target.classList.contains('chat-image')) {
         const imgElement = event.target;
-        verifyUser(function() {
-          setTimeout(function() {
-            imgElement.style.filter = 'none'; // 去除模糊效果
-          }, 3000); // 3 秒后显示图片
-        });
+
+        if (!firstClickDone) {
+          // 第一次点击，直接显示图片
+          imgElement.style.filter = 'none'; // 去除模糊效果
+          imgElement.dataset.firstClickDone = 'true'; // 标记已完成第一次点击
+          firstClickDone = true;
+        } else {
+          // 已经点击过，显示模态弹窗
+          imgElement.style.filter = 'blur(5px)'; // 重新应用模糊效果
+          showModal(function() {
+            setTimeout(function() {
+              imgElement.style.filter = 'none'; // 3 秒后去除模糊效果
+            }, 3000);
+          });
+        }
       }
     });
   </script>

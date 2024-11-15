@@ -21,20 +21,29 @@
       /* 可选：添加上边距以增加图片与文字之间的间距 */
       border-radius: 10px;
       filter: blur(5px);
-      cursor: pointer; /* 鼠标悬停时显示为可点击 */
+      cursor: pointer;
+      /* 鼠标悬停时显示为可点击 */
     }
+
     .message__bubble {
-      margin-right: 5px; /* Add margin to the right of the message bubble */
+      margin-right: 5px;
+      /* Add margin to the right of the message bubble */
     }
+
     .message__time {
-      margin-left: 5px; /* Add margin to the left of the message time */
+      margin-left: 5px;
+      /* Add margin to the left of the message time */
     }
+
     .message__info {
-      margin-bottom: 2px; /* Reduce margin to the bottom of each message info */
+      margin-bottom: 2px;
+      /* Reduce margin to the bottom of each message info */
     }
+
     #chat-container {
       overflow-y: auto;
-      padding-bottom: 60px; /* Ensure space for the reply form */
+      padding-bottom: 60px;
+      /* Ensure space for the reply form */
     }
 
     /* 模态弹窗的样式 */
@@ -44,11 +53,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+      background: rgba(0, 0, 0, 0.5);
+      /* 半透明背景 */
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1000; /* 确保弹窗在最上层 */
+      z-index: 1000;
+      /* 确保弹窗在最上层 */
     }
 
     .modal-content {
@@ -59,13 +70,24 @@
     }
 
     /* 为视频和音频添加样式 */
-    .chat-video, .chat-audio {
+    .chat-video,
+    .chat-audio {
       max-width: 280px;
       width: 100%;
       margin-top: 1px;
       margin-bottom: 5px;
       border-radius: 10px;
       cursor: pointer;
+
+      /* 添加以下样式以确保音频元素可见 */
+      background-color: #f0f0f0;
+      /* 添加背景色 */
+      min-height: 30px;
+      /* 设置最小高度 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     .chat-video {
@@ -74,6 +96,24 @@
 
     .chat-audio {
       /* 音频特定样式（如果需要） */
+      position: relative;
+    }
+
+    /* 可选：为音频添加播放图标 */
+    .chat-audio::before {
+      content: '🎵 点击播放';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #555;
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    /* 隐藏默认的播放提示文字 */
+    .chat-audio::-webkit-media-controls {
+      display: none !important;
     }
   </style>
 </head>
@@ -95,6 +135,14 @@
   <main class="main-screen main-chat" id="chat-container">
     <div class="chat__timestamp">Friday, August 20, 2021</div>
     <!-- The chat messages will be added here -->
+    <div class="message-row">
+      <div class="message-row__content">
+        <div class="message__info">
+          <audio controls class="chat-audio" src="./3.mp3"></audio>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <form class="reply">
@@ -214,7 +262,7 @@
     messages.forEach(renderMessage);
 
     const replyForm = document.querySelector('.reply');
-    replyForm.addEventListener('submit', function(event) {
+    replyForm.addEventListener('submit', function (event) {
       event.preventDefault();
       const input = replyForm.querySelector('input[type="text"]');
       const newMessage = input.value.trim();
@@ -235,14 +283,14 @@
       modalOverlay.style.display = 'flex';
 
       const verifyButton = document.getElementById('verify-button');
-      verifyButton.onclick = function() {
+      verifyButton.onclick = function () {
         modalOverlay.style.display = 'none';
         callback();
       };
     }
     var firstClickDone = false;
     // 更新图片的点击事件监听器
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       if (event.target.classList.contains('chat-image')) {
         const imgElement = event.target;
 
@@ -254,8 +302,8 @@
         } else {
           // 已经点击过，显示模态弹窗
           imgElement.style.filter = 'blur(5px)'; // 重新应用模糊效果
-          showModal(function() {
-            setTimeout(function() {
+          showModal(function () {
+            setTimeout(function () {
               imgElement.style.filter = 'none'; // 3 秒后去除模糊效果
             }, 3000);
           });
@@ -266,7 +314,7 @@
     // 添加 handleMediaClick 函数，处理视频和音频的点击事件
     function handleMediaClick(event) {
       const mediaElement = event.target;
-      
+
       if (!mediaElement.dataset.firstClickDone) {
         // 第一次点击，直接取消模糊效果并启用控件
         mediaElement.style.filter = 'none';
@@ -276,8 +324,8 @@
         // 已经点击过，显示模态弹窗
         mediaElement.style.filter = 'blur(5px)';
         mediaElement.controls = false;
-        showModal(function() {
-          setTimeout(function() {
+        showModal(function () {
+          setTimeout(function () {
             mediaElement.style.filter = 'none';
             mediaElement.controls = true;
           }, 3000);

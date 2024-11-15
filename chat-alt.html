@@ -49,6 +49,7 @@
 
   <main class="main-screen main-chat" id="chat-container">
     <div class="chat__timestamp">Friday, August 20, 2021</div>
+    <!-- The chat messages will be added here -->
   </main>
 
   <form class="reply">
@@ -82,6 +83,9 @@
         author: 'own',
         content: [
           { type: 'text', text: 'What?', time: '15:22' },
+          { type: 'text', text: 'Hi, What?', time: '15:22' }, 
+          { type: 'text', text: 'Please tell me that you didn\'t play with toilet papers again.', time: '15:23' },
+          { type: 'text', text: 'Please tell me that you didn\'t play with toilet papers again.', time: '15:23' },
           { type: 'text', text: 'Please tell me that you didn\'t play with toilet papers again.', time: '15:23' }
         ]
       },
@@ -90,6 +94,7 @@
         avatar: 'Photos/leo.JPG',
         content: [
           { type: 'text', text: 'Done playing! 🐶' },
+          { type: 'text', text: 'Done playing! 🐶', time: '15:35' },
           { type: 'text', text: 'Toilet papers always make me happy.', time: '15:35' },
           { type: 'text', text: 'We should do it together sometime.', time: '15:36' },
           { type: 'text', text: 'Shiru seems to be really cranky right now.', time: '18:41' },
@@ -119,9 +124,9 @@
         const messageInfo = document.createElement('div');
         messageInfo.classList.add('message__info');
         if (message.author === 'own' && content !== message.content[message.content.length - 1]) {
-          messageInfo.classList.add('message__info-own-not-end');
+          // messageInfo.classList.add('message__info-own-not-end');
         } else if (content !== message.content[message.content.length - 1]) {
-          messageInfo.classList.add('message__bubble-not-end');
+          // messageInfo.classList.add('message__bubble-not-end');
         }
 
         if (content.type === 'image') {

@@ -197,7 +197,7 @@
             video.src = content.src;
             video.controls = false; // 初始不显示控件
             video.classList.add('chat-video');
-            video.style.filter = 'blur(5px)';
+            // video.style.filter = 'blur(5px)';
             video.addEventListener('click', handleMediaClick);
             messageInfo.appendChild(video);
           } else if (content.type === 'audio') {
@@ -205,7 +205,7 @@
             audio.src = content.src;
             audio.controls = true; // 添加 controls 属性
             audio.classList.add('chat-audio');
-            audio.style.filter = 'blur(5px)';
+            // audio.style.filter = 'blur(5px)';
             audio.addEventListener('click', handleMediaClick);
             messageInfo.appendChild(audio);
           } else if (content.type === 'text') {

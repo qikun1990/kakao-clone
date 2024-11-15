@@ -217,7 +217,7 @@
           } else if (content.type === 'video') {
             const video = document.createElement('video');
             video.src = content.src;
-            video.controls = false; // 初始不显示控件
+            video.controls = true; // 显示视频控件
             video.classList.add('chat-video');
             video.addEventListener('click', handleMediaClick);
 

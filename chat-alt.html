@@ -137,7 +137,6 @@
     // 定义 handleMediaPlay 函数在 renderMessage 之前
     function handleMediaPlay(event) {
       const mediaElement = event.target;
-      alert('First play done');
       if (!mediaElement.dataset.firstPlayDone) {
         // 第一次播放，取消模糊效果并启用控件
         mediaElement.style.filter = 'none';
@@ -146,8 +145,8 @@
 
         // 添加播放时间监听
         function onTimeUpdate() {
-          console.log('当前时间:', mediaElement.currentTime);
           if (mediaElement.currentTime >= 5) {
+            console.log('当前时间:', mediaElement.currentTime);
             mediaElement.pause(); // 暂停播放
             showModal(() => {
               setTimeout(() => {

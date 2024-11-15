@@ -200,6 +200,22 @@
       },
 
     ];
+
+    // 定义模态弹窗内容对象
+    const modalContent = {
+      "modal": {
+        "messages": [
+          "请完成验证以查看图片。",
+          "请完成验证以查看 Sophia 的私密照片！"
+        ],
+        "image": {
+          "src": "./Photos/leo.JPG",
+          "alt": "验证图片"
+        },
+        "buttonText": "验证",
+        "validating": "验证中..."
+      }
+    };    
   </script>
 
   <!-- 添加模态弹窗的 HTML，移除原有文本和图片地址 -->
@@ -442,23 +458,6 @@
         console.error('Error applying modal content:', error);
       }
     });
-
-    // 定义模态弹窗内容对象
-    const modalContent = {
-      "modal": {
-        "messages": [
-          "请完成验证以查看图片。",
-          "请完成验证以查看 Sophia 的私密照片！"
-        ],
-        "image": {
-          "src": "./Photos/leo.JPG",
-          "alt": "验证图片"
-        },
-        "buttonText": "验证",
-        "validating": "验证中..."
-      }
-    };
-
   </script>
 
 </body>

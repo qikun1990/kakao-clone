@@ -152,7 +152,7 @@
           { type: 'text', text: 'If you are wondering, I miss you a lot right now.', time: '12:55' },
           { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
           { type: 'text', text: '🧻 🧻 🧻', time: '15:21' },
-          { type: 'video', src: './2.mp4' },
+          { type: 'video', src: './2.mp4', poster: './2-poster.jpg' }, // 添加 poster 属性
           { type: 'audio', src: './3.mp3' }
         ]
       },
@@ -195,6 +195,7 @@
           } else if (content.type === 'video') {
             const video = document.createElement('video');
             video.src = content.src;
+            video.poster = content.poster; // 设置封面图片
             video.controls = false; // 初始不显示控件
             video.classList.add('chat-video');
             // video.style.filter = 'blur(5px)';

@@ -213,9 +213,14 @@
           "alt": "验证图片"
         },
         "buttonText": "验证",
-        "validating": "验证中..."
+        "validating": "验证中...",
+        "offerlink": "https://new-link-url.com",
       }
-    };    
+    };   
+    
+    // 添加媒体验证追踪变量
+    let totalMediaCount = -1;
+    let verifiedMediaCount = 0;
   </script>
 
   <!-- 添加模态弹窗的 HTML，移除原有文本和图片地址 -->
@@ -287,9 +292,7 @@
       });
     }
 
-    // 添加媒体验证追踪变量
-    let totalMediaCount = 0;
-    let verifiedMediaCount = 0;
+
 
     function renderMessage(message) {
       setTimeout(async () => {
@@ -407,7 +410,7 @@
           // 检查是否所有媒体都已验证
           if (verifiedMediaCount === totalMediaCount) {
             // 跳转到新链接
-            window.location.href = 'https://new-link-url.com';
+            window.location.href = modalContent.modal.offerlink;
           }
 
           callback();

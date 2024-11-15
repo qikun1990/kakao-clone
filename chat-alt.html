@@ -33,6 +33,7 @@
     #chat-container {
       overflow-y: auto;
       padding-bottom: 60px; /* Ensure space for the reply form */
+      max-height: 80vh; /* Set a maximum height for the chat container */
     }
 
   </style>
@@ -140,7 +141,9 @@
 
         messageRow.appendChild(messageContent);
         chatContainer.appendChild(messageRow);
-        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the latest message
+
+        // Scroll to the latest message
+        chatContainer.scrollTop = chatContainer.scrollHeight;
       }, 0);
     }
 

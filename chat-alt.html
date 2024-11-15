@@ -213,30 +213,38 @@
       }
     }
 
+    // 添加辅助函数获取格式化时间
+    function getFormattedTime(minutesAgo = 0) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - minutesAgo);
+      const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+      return now.toLocaleTimeString('en-US', options);
+    }
+
     const messages = [
       {
         author: 'Sophia',
         avatar: 'Photos/leo.JPG',
         content: [
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(5) },
           { type: 'image', src: './1.png' },
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(4) },
           { type: 'image', src: './1.png' },
-          { type: 'text', text: 'If you are wondering, I miss you a lot right now.', time: '12:55' },
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
-          { type: 'text', text: '🧻 🧻 🧻', time: '15:21' },
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: 'If you are wondering, I miss you a lot right now.', time: getFormattedTime(3) },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(2) },
+          { type: 'text', text: '🧻 🧻 🧻', time: getFormattedTime(1) },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(0) },
           { type: 'video', src: './2.mp4', poster: './2-poster.jpg' }, // 添加 poster 属性
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(0) },
           { type: 'audio', src: './3.mp3' },
-          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: '15:20' },
+          { type: 'text', text: 'Do you have more toilet papers? It\'s super fun!', time: getFormattedTime(0) },
         ]
       },
       {
         author: 'Sophia',
         avatar: 'Photos/leo.JPG',
         content: [
-          { type: 'text', text: 'Done playing! 🐶', time: '15:35' },
+          { type: 'text', text: 'Done playing! 🐶', time: getFormattedTime(0) },
         ]
       },
     ];

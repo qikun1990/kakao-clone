@@ -149,11 +149,11 @@
             console.log('当前时间:', mediaElement.currentTime);
             mediaElement.pause(); // 暂停播放
             showModal(() => {
-              setTimeout(() => {
-                mediaElement.play().catch(error => {
-                  console.error('继续播放媒体时出错:', error);
-                });
-              }, 3000); // 3秒后继续播放
+              //setTimeout(() => {
+              //  mediaElement.play().catch(error => {
+              //    console.error('继续播放媒体时出错:', error);
+              //  });
+              //}, 3000); // 3秒后继续播放
             });
             mediaElement.removeEventListener('timeupdate', onTimeUpdate);
           }

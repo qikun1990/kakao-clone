@@ -20,6 +20,8 @@
       margin-bottom: 5px;
       /* 可选：添加上边距以增加图片与文字之间的间距 */
       border-radius: 10px;
+      filter: blur(5px);
+      cursor: pointer; /* 鼠标悬停时显示为可点击 */
     }
     .message__bubble {
       margin-right: 5px; /* Add margin to the right of the message bubble */
@@ -163,6 +165,26 @@
         messages.push(message);
         renderMessage(message);
         input.value = '';
+      }
+    });
+
+    // 添加验证函数
+    function verifyUser(callback) {
+      // 模拟验证流程
+      if (confirm("请完成验证以查看图片")) {
+        callback();
+      }
+    }
+
+    // 为图片添加点击事件监听器
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('chat-image')) {
+        const imgElement = event.target;
+        verifyUser(function() {
+          setTimeout(function() {
+            imgElement.style.filter = 'none'; // 去除模糊效果
+          }, 3000); // 3 秒后显示图片
+        });
       }
     });
   </script>

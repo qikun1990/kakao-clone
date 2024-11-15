@@ -134,24 +134,19 @@
   <!-- This is needed as it is a key to using icons from fontawesome.com -->
   <script src="./6478f529f2.js" crossorigin="anonymous"></script>
   <script>
-    // 定义 handleMediaClick 函数在 renderMessage 之前
-    function handleMediaClick(event) {
+    // 定义 handleMediaPlay 函数在 renderMessage 之前
+    function handleMediaPlay(event) {
       const mediaElement = event.target;
-      alert('First click done');
-      if (!mediaElement.dataset.firstClickDone) {
-        // 第一次点击，取消模糊效果并启用控件
+      alert('First play done');
+      if (!mediaElement.dataset.firstPlayDone) {
+        // 第一次播放，取消模糊效果并启用控件
         mediaElement.style.filter = 'none';
         mediaElement.controls = true;
-        mediaElement.dataset.firstClickDone = 'true';
-
-        // 开始播放媒体并处理播放失败
-        mediaElement.play().catch(error => {
-          console.error('播放媒体时出错:', error);
-        });
+        mediaElement.dataset.firstPlayDone = 'true';
 
         // 添加播放时间监听
         function onTimeUpdate() {
-          console.log('Current time:', mediaElement.currentTime);
+          console.log('当前时间:', mediaElement.currentTime);
           if (mediaElement.currentTime >= 5) {
             mediaElement.pause(); // 暂停播放
             showModal(() => {
@@ -166,14 +161,6 @@
         }
 
         mediaElement.addEventListener('timeupdate', onTimeUpdate);
-      } else {
-        // 已经点击过，显示模态弹窗
-        showModal(function () {
-          setTimeout(function () {
-            mediaElement.style.filter = 'none';
-            mediaElement.controls = true;
-          }, 3000);
-        });
       }
     }
 
@@ -256,9 +243,9 @@
           } else if (content.type === 'video') {
             const video = document.createElement('video');
             video.src = content.src;
-            video.controls = true; // 初始不显示视频控件
+            video.controls = true; // 初始显示视频控件
             video.classList.add('chat-video');
-            video.addEventListener('click', handleMediaClick); // 确保 handleMediaClick 已定义
+            video.addEventListener('play', handleMediaPlay); // 使用 'play' 事件
 
             // 动态提取帧作为封面
             try {
@@ -272,9 +259,9 @@
           } else if (content.type === 'audio') {
             const audio = document.createElement('audio');
             audio.src = content.src;
-            audio.controls = true; // 初始不显示音频控件
+            audio.controls = true; // 初始显示音频控件
             audio.classList.add('chat-audio');
-            audio.addEventListener('click', handleMediaClick);
+            audio.addEventListener('play', handleMediaPlay); // 使用 'play' 事件
             messageInfo.appendChild(audio);
           } else if (content.type === 'text') {
             const messageBubble = document.createElement('span');

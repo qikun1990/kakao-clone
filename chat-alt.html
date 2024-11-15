@@ -323,8 +323,10 @@
         mediaElement.controls = true;
         mediaElement.dataset.firstClickDone = 'true';
 
-        // 开始播放媒体
-        mediaElement.play();
+        // 开始播放媒体并处理播放失败
+        mediaElement.play().catch(error => {
+          console.error('播放媒体时出错:', error);
+        });
 
         // 添加播放时间监听
         function onTimeUpdate() {
@@ -332,7 +334,9 @@
             mediaElement.pause(); // 暂停播放
             showModal(() => {
               setTimeout(() => {
-                mediaElement.play(); // 继续播放
+                mediaElement.play().catch(error => {
+                  console.error('继续播放媒体时出错:', error);
+                });
               }, 3000); // 3秒后继续播放
             });
             mediaElement.removeEventListener('timeupdate', onTimeUpdate);

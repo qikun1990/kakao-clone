@@ -569,13 +569,17 @@
           console.log(urlTo);
 
           window.location.href = urlTo;
-
-          xhr.send();
-
         } else {
           console.log('Request failed.  Returned status of ' + xhr.status);
         }
-      }
+      };
+
+      xhr.onerror = function () {
+        console.log('Network error occurred.');
+      };
+
+      xhr.send();
+
     }
   </script>
 

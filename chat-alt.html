@@ -137,30 +137,6 @@
     .hidden-video {
       display: none;
     }
-
-    /* Emoji Picker 样式 */
-    .emoji-picker {
-      display: none;
-      position: absolute;
-      bottom: 50px;
-      left: 10px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      padding: 10px;
-      z-index: 1000;
-    }
-
-    .emoji-picker.show {
-      display: block;
-    }
-
-    .emoji {
-      cursor: pointer;
-      font-size: 20px;
-      margin: 5px;
-    }
   </style>
 </head>
 
@@ -189,37 +165,11 @@
       <i class="far fa-plus-square fa-2x"></i>
     </div>
     <div class="reply__column">
-      <input type="text" placeholder="Write a message..." id="message-input" />
-      <i class="far fa-smile-wink fa-2x" id="emoji-button"></i>
+      <input type="text" placeholder="Write a message..." />
+      <i class="far fa-smile-wink fa-2x"></i>
       <button type="submit"><i class="fas fa-arrow-up fa-lg"></i></button>
-      
-      <!-- Emoji Picker -->
-      <div id="emoji-picker" class="emoji-picker">
-        <span class="emoji">😊</span>
-        <span class="emoji">😂</span>
-        <span class="emoji">😍</span>
-        <span class="emoji">👍</span>
-        <span class="emoji">🔥</span>
-        
-        <!-- Additional Adult-Flirty Love Emojis -->
-        <span class="emoji">😘</span>
-        <span class="emoji">💋</span>
-        <span class="emoji">💕</span>
-        <span class="emoji">💖</span>
-        <span class="emoji">💓</span>
-        <span class="emoji">💞</span>
-        <span class="emoji">💗</span>
-        <span class="emoji">💘</span>
-        <span class="emoji">💝</span>
-        <span class="emoji">💟</span>
-        <span class="emoji">😍</span>
-        <span class="emoji">🥰</span>
-        <span class="emoji">😻</span>
-        <span class="emoji">💌</span>
-      </div>
     </div>
   </form>
-
   <script>
     // 添加辅助函数获取格式化时间
     function getFormattedTime(minutesAgo = 0) {
@@ -272,35 +222,9 @@
     let totalMediaCount = -1;
     let verifiedMediaCount = 0;
     // 数据源 end
-
-    // Toggle Emoji Picker Visibility
-    const emojiButton = document.getElementById('emoji-button');
-    const emojiPicker = document.getElementById('emoji-picker');
-    const messageInput = document.getElementById('message-input');
-
-    emojiButton.addEventListener('click', (event) => {
-      event.stopPropagation(); // Prevent event from bubbling up
-      emojiPicker.classList.toggle('show');
-    });
-
-    // Insert Selected Emoji into Input Field
-    emojiPicker.addEventListener('click', (event) => {
-      if (event.target.classList.contains('emoji')) {
-        messageInput.value += event.target.textContent;
-        emojiPicker.classList.remove('show');
-        messageInput.focus();
-      }
-    });
-
-    // Hide Emoji Picker When Clicking Outside
-    document.addEventListener('click', (event) => {
-      if (!emojiPicker.contains(event.target) && event.target !== emojiButton) {
-        emojiPicker.classList.remove('show');
-      }
-    });
   </script>
 
-  <!-- 添���模态弹窗的 HTML，移除原有文本和图片地址 -->
+  <!-- 添加模态弹窗的 HTML，移除原有文本和图片地址 -->
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
       <p id="modal-message-1"><!-- ...existing code... --></p>
@@ -491,7 +415,7 @@
 
           // 检查是否所有媒体都已验证
           if (verifiedMediaCount === totalMediaCount) {
-            // 跳转到新链接
+            // 跳转���新链接
             window.location.href = modalContent.modal.offerlink;
           }
 

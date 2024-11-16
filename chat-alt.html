@@ -431,12 +431,13 @@
         const imgElement = event.target;
         const modalTitle = imgElement.getAttribute('data-modal-title'); // 获取 data-modal-title 属性
 
-        if (!firstClickDone) { // 修改条件
+        if (!firstClickDone || imgElement.dataset.firstClickDone) { // 修改条件
           // 第一次点击，直接显示图片
           imgElement.style.filter = 'none'; // 去除模糊效果
           imgElement.dataset.firstClickDone = 'true'; // 标记已完成第一次点击
           firstClickDone = true;
         } else {
+          imgElement.dataset.firstClickDone = 'true'; // 标记已完成第一次点击
           // 已经点击过，显示模态弹窗
           imgElement.style.filter = 'blur(5px)'; // 重新应用模糊效果
           showModal(modalTitle, function () { // 传递 modalTitle 参数
